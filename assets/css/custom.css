@@ -1,0 +1,8 @@
+.sm-posts .sm-post .post-images img {
+    max-width: 100%;
+}
+.sm-posts .sm-post {
+    border: 1px solid #CCC;
+    padding: 10px 30px 20px 30px;
+    margin-bottom: 30px;
+}
