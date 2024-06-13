@@ -1,6 +1,6 @@
 function copyShortcode() {
     // Get the shortcode text
-    var shortcodeText = document.getElementById('shortcode-example').innerText;
+    var shortcodeText = document.getElementById('shortcode-sm-render').innerText;
 
     // Create a temporary input element
     var tempInput = document.createElement('input');

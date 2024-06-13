@@ -100,7 +100,7 @@ class SettingsPage
         <li><strong><?php _e('per_page', 'sm-post-render'); ?></strong>: <?php _e('The number of posts to display per page (default and restricted to: 5).', 'sm-post-render'); ?></li>
     </ul>
     <p><strong><?php _e('Example Usage:', 'sm-post-render'); ?></strong></p>
-    <pre style="display: inline;"><code id="shortcode-example">[sm-post per_page="5"]</code></pre>
+    <pre style="display: inline;"><code id="shortcode-sm-render">[sm-post per_page="5"]</code></pre>
     <i id="copy-shortcode-icon" class="fa fa-clone" aria-hidden="true" onclick="copyShortcode()" title="<?php _e('Copy', 'sm-post-render'); ?>" style="cursor: pointer; margin-left: 10px;"></i>
     <h2><?php _e('Additional Information', 'sm-post-render'); ?></h2>
     <p><?php _e('To customize the appearance of the posts, you can add your own CSS rules in your theme\'s stylesheet or use the provided CSS file in the plugin.', 'sm-post-render'); ?></p>
