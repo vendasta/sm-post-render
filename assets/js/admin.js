@@ -15,3 +15,14 @@ function copyShortcode() {
     snackbar.className = 'show';
     setTimeout(function() { snackbar.className = snackbar.className.replace('show', ''); }, 3000);
 }
+
+jQuery(document).ready(function($) {
+    $('.nav-tab').click(function(e) {
+        e.preventDefault();
+        $('.nav-tab').removeClass('nav-tab-active');
+        $(this).addClass('nav-tab-active');
+
+        $('.tab-content').hide();
+        $($(this).attr('href')).show();
+    });
+});

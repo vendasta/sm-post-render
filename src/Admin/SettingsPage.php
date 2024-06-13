@@ -85,8 +85,14 @@ class SettingsPage
     public function render()
     {
         ?>
-        <div class="wrap">
+    <div class="wrap">
     <h1><?php _e('SM Post Render Settings', 'sm-post-render'); ?></h1>
+    <h2 class="nav-tab-wrapper">
+        <a href="#account-settings" class="nav-tab nav-tab-active">Account Settings</a>
+        <a href="#shortcode-details" class="nav-tab">Shortcode Details</a>
+        <a href="#additional-information" class="nav-tab">Additional Information</a>
+    </h2>
+    <div id="account-settings" class="tab-content">
     <form method="post" action="options.php">
         <?php
         settings_fields('sm_post_render_options_group');
@@ -94,6 +100,8 @@ class SettingsPage
         submit_button();
         ?>
     </form>
+    </div>
+    <div id="shortcode-details" class="tab-content" style="display: none;">
     <h2><?php _e('Shortcode Usage', 'sm-post-render'); ?></h2>
     <p><?php _e('Use the', 'sm-post-render'); ?> <code>[sm-post]</code> <?php _e('shortcode to display social media posts on your website. Here are the available attributes:', 'sm-post-render'); ?></p>
     <ul>
@@ -102,9 +110,12 @@ class SettingsPage
     <p><strong><?php _e('Example Usage:', 'sm-post-render'); ?></strong></p>
     <pre style="display: inline;"><code id="shortcode-sm-render">[sm-post per_page="5"]</code></pre>
     <i id="copy-shortcode-icon" class="fa fa-clone" aria-hidden="true" onclick="copyShortcode()" title="<?php _e('Copy', 'sm-post-render'); ?>" style="cursor: pointer; margin-left: 10px;"></i>
+    </div>
+    <div id="additional-information" class="tab-content" style="display: none;">
     <h2><?php _e('Additional Information', 'sm-post-render'); ?></h2>
     <p><?php _e('To customize the appearance of the posts, you can add your own CSS rules in your theme\'s stylesheet or use the provided CSS file in the plugin.', 'sm-post-render'); ?></p>
     <p><?php _e('Ensure your API keys (Business ID and Feed ID) are correctly configured to fetch the posts successfully.', 'sm-post-render'); ?></p>
+    </div>
     <div id="snackbar"><?php _e('Shortcode copied to clipboard', 'sm-post-render'); ?></div>
 </div>
 
