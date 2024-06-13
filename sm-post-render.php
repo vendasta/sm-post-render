@@ -4,6 +4,8 @@
  * Description: A custom WordPress plugin with a settings page for AG-ID.
  * Version: 1.0.0
  * Author: Website Pro Team
+ * Requires at least: 5.0
+ * Requires PHP: 7.4
  */
 
 if (!defined('ABSPATH')) {

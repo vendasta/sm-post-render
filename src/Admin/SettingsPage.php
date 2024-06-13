@@ -113,7 +113,7 @@ class SettingsPage
     </div>
     <div id="additional-information" class="tab-content" style="display: none;">
     <h2><?php _e('Additional Information', 'sm-post-render'); ?></h2>
-    <p><?php _e('To customize the appearance of the posts, you can add your own CSS rules in your theme\'s stylesheet or use the provided CSS file in the plugin.', 'sm-post-render'); ?></p>
+    <p><?php _e('To customize the appearance of the posts, you can add your own CSS rules in your theme\'s stylesheet.', 'sm-post-render'); ?></p>
     <p><?php _e('Ensure your API keys (Business ID and Feed Identifier) are correctly configured to fetch the posts successfully.', 'sm-post-render'); ?></p>
     </div>
     <div id="snackbar"><?php _e('Shortcode copied to clipboard', 'sm-post-render'); ?></div>
