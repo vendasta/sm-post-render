@@ -27,7 +27,6 @@ class SettingsPage
         // Register the settings
         register_setting('sm_post_render_options_group', 'ag_id');
         register_setting('sm_post_render_options_group', 'feed_id');
-        register_setting('sm_post_render_options_group', 'default_per_page');
 
         add_settings_section(
             'sm_post_render_main_section',
@@ -48,14 +47,6 @@ class SettingsPage
             'feed_id_field',
             'Feed ID',
             [$this, 'feedIdFieldRender'],
-            'sm-post-render',
-            'sm_post_render_main_section'
-        );
-
-        add_settings_field(
-            'default_per_page_field',
-            'Default Posts Per Page',
-            [$this, 'defaultPerPageFieldRender'],
             'sm-post-render',
             'sm_post_render_main_section'
         );
@@ -84,15 +75,6 @@ class SettingsPage
         <?php
     }
 
-    public function defaultPerPageFieldRender()
-    {
-        $defaultPerPage = get_option('default_per_page', 5);
-        ?>
-        <input type="number" name="default_per_page" class="regular-text" value="<?php echo isset($defaultPerPage) ? esc_attr($defaultPerPage) : 5; ?>" min="1" />
-        <p class="description">Enter the default number of posts to display per page. Default is 5.</p>
-        <?php
-    }
-
     public function render()
     {
         ?>
@@ -108,7 +90,7 @@ class SettingsPage
             <h2>Shortcode Usage</h2>
             <p>Use the <code>[sm-post]</code> shortcode to display social media posts on your website. Here are the available attributes:</p>
             <ul>
-                <li><strong>per_page</strong>: The number of posts to display per page (default: 5).</li>
+                <li><strong>per_page</strong>: The number of posts to display per page (default and restricted to: 5).</li>
             </ul>
             <p><strong>Example Usage:</strong></p>
             <pre style="display: inline;"><code id="shortcode-example">[sm-post per_page="5"]</code></pre>
