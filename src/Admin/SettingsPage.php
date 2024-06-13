@@ -8,6 +8,7 @@ class SettingsPage
     {
         add_action('admin_menu', [$this, 'addAdminMenu']);
         add_action('admin_init', [$this, 'settingsInit']);
+        add_action('admin_enqueue_scripts', [$this, 'enqueue_admin_scripts']);
     }
 
     public function addAdminMenu()
@@ -26,11 +27,12 @@ class SettingsPage
         // Register the settings
         register_setting('sm_post_render_options_group', 'ag_id');
         register_setting('sm_post_render_options_group', 'feed_id');
+        register_setting('sm_post_render_options_group', 'default_per_page');
 
         add_settings_section(
             'sm_post_render_main_section',
             'Main Settings',
-            null,
+            [$this, 'mainSectionCallback'],
             'sm-post-render'
         );
 
@@ -49,7 +51,19 @@ class SettingsPage
             'sm-post-render',
             'sm_post_render_main_section'
         );
-        
+
+        add_settings_field(
+            'default_per_page_field',
+            'Default Posts Per Page',
+            [$this, 'defaultPerPageFieldRender'],
+            'sm-post-render',
+            'sm_post_render_main_section'
+        );
+    }
+
+    public function mainSectionCallback()
+    {
+        echo '<p>Configure the main settings for SM Post Render.</p>';
     }
 
     public function agIdFieldRender()
@@ -57,6 +71,7 @@ class SettingsPage
         $agId = get_option('ag_id');
         ?>
         <input type="text" name="ag_id" class="regular-text" value="<?php echo isset($agId) ? esc_attr($agId) : ''; ?>" />
+        <p class="description">Enter your Business ID here.</p>
         <?php
     }
 
@@ -65,6 +80,16 @@ class SettingsPage
         $feedId = get_option('feed_id');
         ?>
         <input type="text" name="feed_id" class="regular-text" value="<?php echo isset($feedId) ? esc_attr($feedId) : ''; ?>" />
+        <p class="description">Enter your Feed ID here.</p>
+        <?php
+    }
+
+    public function defaultPerPageFieldRender()
+    {
+        $defaultPerPage = get_option('default_per_page', 5);
+        ?>
+        <input type="number" name="default_per_page" class="regular-text" value="<?php echo isset($defaultPerPage) ? esc_attr($defaultPerPage) : 5; ?>" min="1" />
+        <p class="description">Enter the default number of posts to display per page. Default is 5.</p>
         <?php
     }
 
@@ -86,8 +111,21 @@ class SettingsPage
                 <li><strong>per_page</strong>: The number of posts to display per page (default: 5).</li>
             </ul>
             <p><strong>Example Usage:</strong></p>
-            <pre><code>[sm-post per_page="5"]</code></pre>
+            <pre style="display: inline;"><code id="shortcode-example">[sm-post per_page="5"]</code></pre>
+            <i id="copy-shortcode-icon" class="fa fa-clone" aria-hidden="true" onclick="copyShortcode()" style="cursor: pointer; margin-left: 10px;"></i>
+            <h2>Additional Information</h2>
+            <p>To customize the appearance of the posts, you can add your own CSS rules in your theme's stylesheet or use the provided CSS file in the plugin.</p>
+            <p>Ensure your API keys (Business ID and Feed ID) are correctly configured to fetch the posts successfully.</p>
         </div>
         <?php
+    }
+
+    public function enqueue_admin_scripts()
+    {
+        // Enqueue Font Awesome
+        wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css', [], '6.0.0-beta3');
+
+        // Enqueue custom JavaScript
+        wp_enqueue_script('sm-post-render-admin', plugin_dir_url(__FILE__) . '../../assets/js/admin.js', [], '1.0.0', true);
     }
 }
